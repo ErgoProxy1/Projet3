@@ -1,0 +1,1 @@
+Le serveur roule à distance sur Heroku, mais vous pouvez quand meme le rouler en local avec "npm run serve" apres avoir fait "npm install".
