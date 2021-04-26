@@ -1,0 +1,50 @@
+<resources>
+
+    <style name="Widget.Theme.ChatPrototype.MyView" parent="">
+        <item name="android:background">@color/gray_400</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.AccentText" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/colorAccentLight</item>
+    </style>
+
+    <style name="TextAppearance.DialogLightText" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">38dp</item>
+        <item name="android:textColor">@color/colorAccentLight</item>
+    </style>
+
+
+    <style name="TextAppearance.Subtitle" parent="TextAppearance.Title">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.Attention" parent="TextAppearance.AccentText">
+        <item name="android:textSize">32dp</item>
+    </style>
+
+    <style name="TextAppearance.Client" parent="TextAppearance.Attention">
+        <item name="android:textColor">@color/base_text_color</item>
+    </style>
+
+    <style name="TabAppearance.Selector" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ConfirmationWidget" parent="">
+        <item name="android:backgroundTint">@color/colorConfirmation</item>
+    </style>
+
+</resources>

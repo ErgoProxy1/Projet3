@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Fais-moi un Dessin</string>
+    <string name="begin_game">Débuter</string>
+    <string name="create_game">Créer une partie</string>
+    <string name="join_game">Joindre une partie</string>
+    <string name="launch_tutorial">Comment jouer</string>
+    <string name="social_menu">Social</string>
+    <string name="tutorial">Tutoriel</string>
+
+    <string name="social_menu_title">Liste d\'amis</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

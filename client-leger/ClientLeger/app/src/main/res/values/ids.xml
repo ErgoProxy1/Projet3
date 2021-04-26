@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="channel_creation_name_input" type="id" />
+    <item name="textView6" type="id" />
+    <item name="textView10" type="id" />
+</resources>

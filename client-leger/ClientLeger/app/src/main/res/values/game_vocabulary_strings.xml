@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="game_difficulty_0">Toutes</string>
+    <string name="game_difficulty_1">Facile</string>
+    <string name="game_difficulty_2">Moyenne</string>
+    <string name="game_difficulty_3">Difficile</string>
+    <string name="game_mode_0">Tous</string>
+    <string name="game_mode_1">Classique</string>
+    <string name="game_mode_2">Chacun Pour Soi</string>
+    <string name="game_powerups_option">Power Ups</string>
+    <string name="game_private_game_option">Partie privée</string>
+    <string name="friends_only_game_option">Amis seulement</string>
+    <string name="open_only_game_option">Places libres seulement</string>
+</resources>

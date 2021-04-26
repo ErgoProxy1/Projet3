@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00AFAFAF"
+    tools:context=".Drawing.CanvasFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF898D89">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00FFFFFF"
+            android:foreground="@drawable/canvas_border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <com.example.FaisMoiUnDessin.Drawing.CanvasLayout
+                android:id="@+id/canvasLayout"
+                android:layout_width="800dp"
+                android:layout_height="600dp"
+                android:background="#FFFFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.example.FaisMoiUnDessin.Drawing.CanvasLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#FF2F2F2F"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:text="Transparence"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/seekBarAlpha"
+                app:layout_constraintStart_toStartOf="@+id/seekBarAlpha"
+                app:layout_constraintTop_toBottomOf="@+id/seekBarWidth" />
+
+            <SeekBar
+                android:id="@+id/seekBarAlpha"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="0dp"
+                android:layout_height="23dp"
+                android:layout_marginBottom="8dp"
+                android:max="255"
+                android:progress="255"
+                android:progressBackgroundTint="#FF000000"
+                android:progressBackgroundTintMode="src_over"
+                android:progressTint="@color/orange"
+                android:rotation="0"
+                android:scrollbarSize="4dp"
+                android:scrollbars="horizontal"
+                android:thumbTint="@color/orange"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/seekBarWidth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#00FFFFFF"
+                android:text="Grosseur de trait"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/seekBarWidth"
+                app:layout_constraintStart_toStartOf="@+id/seekBarWidth"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <SeekBar
+                android:id="@+id/seekBarWidth"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="0dp"
+                android:layout_height="23dp"
+                android:indeterminate="false"
+                android:max="50"
+                android:progress="25"
+                android:progressBackgroundTint="#FF000000"
+                android:progressBackgroundTintMode="src_over"
+                android:progressTint="@color/orange"
+                android:rotation="0"
+                android:scrollbarSize="4dp"
+                android:scrollbars="horizontal"
+                android:thumbTint="@color/orange"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout5"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:backgroundTint="#00FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/guessTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Mot à deviner..."
+                    android:inputType="textPersonName"
+                    android:textColorHint="@color/grey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/guessButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:backgroundTint="@color/button_color"
+                    android:hapticFeedbackEnabled="true"
+                    android:text="Deviner"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textViewTimer"
+                    app:layout_constraintTop_toBottomOf="@+id/guessTextView" />
+
+                <TextView
+                    android:id="@+id/textViewTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/transparent"
+                    android:text="60s"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/guessTextView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout6"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:backgroundTint="#00FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/currentGameMessageText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#00FFFFFF"
+                    android:text="Ronde 1"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/currentGameInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#00FFFFFF"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/currentGameMessageText"
+                    tools:text="Infos" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#FF2F2F2F"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <SeekBar
+                android:id="@+id/seekBarSaturation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="100"
+                android:progressBackgroundTint="#FF000000"
+                android:progressBackgroundTintMode="src_over"
+                android:progressTint="@color/orange"
+                android:thumbTint="@color/orange"
+                app:layout_constraintEnd_toEndOf="@+id/colorPickerLayout"
+                app:layout_constraintStart_toStartOf="@+id/colorPickerLayout"
+                app:layout_constraintTop_toBottomOf="@+id/colorPickerLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:foreground="@drawable/border"
+                app:layout_constraintEnd_toEndOf="@+id/colorPickerLayout"
+                app:layout_constraintStart_toStartOf="@+id/colorPickerLayout"
+                app:layout_constraintTop_toBottomOf="@+id/seekBarSaturation">
+
+                <FrameLayout
+                    android:id="@+id/colorDisplayNoAlpha"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="#FF000000"
+                    app:layout_constrainedHeight="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".5">
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/colorDisplayAlpha"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:drawable/progress_indeterminate_horizontal"
+                    android:foreground="#FF000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/colorDisplayNoAlpha"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </FrameLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/buttonRedo"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/button_color"
+                android:hapticFeedbackEnabled="true"
+                android:text="Refaire"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/buttonUndo" />
+
+            <Button
+                android:id="@+id/buttonGrid"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/button_color"
+                android:hapticFeedbackEnabled="true"
+                android:text="Grille"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/buttonRedo" />
+
+            <Button
+                android:id="@+id/buttonPencil"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/button_color"
+                android:foreground="@drawable/selected_border"
+                android:hapticFeedbackEnabled="true"
+                android:text="Crayon"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:iconTint="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                app:rippleColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/buttonEraser"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/button_color"
+                android:hapticFeedbackEnabled="true"
+                android:insetTop="0dp"
+                android:text="Efface"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/buttonPencil" />
+
+            <Button
+                android:id="@+id/buttonUndo"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/button_color"
+                android:hapticFeedbackEnabled="true"
+                android:text="Annuler"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/buttonEraser" />
+
+            <Button
+                android:id="@+id/buttonHint"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/button_color"
+                android:hapticFeedbackEnabled="true"
+                android:text="Indice"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/colorPickerLayout"
+                app:layout_constraintStart_toStartOf="@+id/colorPickerLayout"
+                app:layout_constraintTop_toBottomOf="@+id/buttonGrid" />
+
+            <Button
+                android:id="@+id/buttonSetBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_color"
+                android:hapticFeedbackEnabled="true"
+                android:text="Choisir Couleur D'Arrière-plan"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/colorPickerLayout"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/colorPickerLayout"
+                app:layout_constraintTop_toBottomOf="@+id/buttonHint" />
+
+            <com.example.FaisMoiUnDessin.Drawing.ColorPickerLayout
+                android:id="@+id/colorPickerLayout"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="#00FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.example.FaisMoiUnDessin.Drawing.ColorPickerLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

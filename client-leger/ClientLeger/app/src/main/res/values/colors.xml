@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#525552</color>
+    <color name="colorPrimaryDark">#20272C</color>
+    <color name="colorAccent">#FF90c6cb</color>
+    <color name="colorAccentLight">#FF90c6cb</color>
+    <color name="legacyColorAccent">#49657E</color>
+    <color name="legacycolorAccentLight">#6F9AC1</color>
+    <color name="colorNegative">#7A2A2A</color>
+    <color name="colorSlickDark">#FF2F2F2F</color>
+    <color name="colorConfirmation">#2165AC</color>
+
+
+    <color name="purple_100">#FFDBB6FF</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="grey">#FFE0E0E0</color>
+    <color name="deep_grey">#FFC0C0C0</color>
+    <color name="dark_grey">#FF101010</color>
+    <color name="light_blue">#FF90C6CB</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
+    <color name="orange">#FFDC3B16</color>
+    <color name="button_color">#FF101010</color>
+    <color name="deactivated_button_color">#FF909090</color>
+    <color name="base_text_color">#FF90c6cb</color>
+    <color name="red">#FFFF0000</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="fading_default">#80525552</color>
+
+</resources>

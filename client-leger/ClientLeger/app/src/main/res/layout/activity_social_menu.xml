@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/social_menu_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <!--<ImageView
+        android:id="@+id/fragment5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />-->
+
+    <fragment
+        android:id="@+id/fragment5"
+        android:name="com.example.FaisMoiUnDessin.Chat.ChatFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/app_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/social_menu_title"
+        android:textAppearance="@style/TextAppearance.Title"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toStartOf="@+id/fragment5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_friend_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/button_color"
+        android:text="Ajouter \nun ami"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/friends_list_container"
+        app:layout_constraintTop_toBottomOf="@+id/app_title2" />
+
+    <Button
+        android:id="@+id/social_profile_nav_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/button_color"
+        android:text="Mon \n Profile"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/add_friend_button"
+        app:layout_constraintTop_toBottomOf="@+id/app_title2" />
+
+    <Switch
+        android:id="@+id/do_not_disturb_switch"
+        android:layout_width="200dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="19dp"
+        android:text="Ne Pas Déranger"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/friends_list_container"
+        app:layout_constraintEnd_toEndOf="@+id/friends_list_container"
+        app:layout_constraintTop_toBottomOf="@+id/app_title2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <LinearLayout
+        android:id="@+id/friends_list_container"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="100dp"
+        android:background="@color/transparent"
+        android:foreground="@drawable/canvas_border"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/fragment5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_title2">
+
+        <TextView
+            android:id="@+id/no_friends_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vous n'avez pas d'amis :("
+            android:textSize="20sp"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/friends_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/requests_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Requêtes"
+        android:textColor="@color/base_text_color"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toStartOf="@+id/fragment5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/friends_list_container" />
+
+    <LinearLayout
+        android:id="@+id/request_list_container"
+        android:layout_width="0dp"
+        android:layout_height="135dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="100dp"
+        android:foreground="@drawable/canvas_border"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/fragment5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/requests_title">
+
+        <TextView
+            android:id="@+id/no_requests_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pas de requêtes d'ami."
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/request_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/bot_name_alice"/>
+    <item android:title="@string/bot_name_bob"/>
+    <item android:title="@string/bot_name_oto"/>
+</menu>

@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="TeamPresenterView">
+        <attr name="teamName" format="string" />
+        <attr name="teamMembers" format="reference" />
+    </declare-styleable>
+</resources>

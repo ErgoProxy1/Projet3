@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AttributeRowView">
+        <attr name="attributeName" format="string" />
+        <attr name="attributeValue" format="string" />
+    </declare-styleable>
+    <declare-styleable name="ChatFragmentSettings">
+        <attr name="inGame" format="boolean"/>
+    </declare-styleable>
+</resources>

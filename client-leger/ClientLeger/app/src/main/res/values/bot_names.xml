@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bot_name_oto">Bot Oto</string>
+    <string name="bot_name_alice">Bot Alice</string>
+    <string name="bot_name_bob">Bot Bob</string>
+</resources>

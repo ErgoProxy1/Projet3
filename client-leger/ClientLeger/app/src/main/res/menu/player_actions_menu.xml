@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/player_actions_option_kick"
+        android:title="vote d'expulsion" />
+    <item
+        android:id="@+id/player_actions_option_switch_team"
+        android:title="changer d'équipe"
+        android:visible="true"/>
+</menu>
