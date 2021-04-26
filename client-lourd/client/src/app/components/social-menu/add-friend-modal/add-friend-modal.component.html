@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h5 class="modal-title">Ajouter un ami</h5>
+    <button type="button" class="close" (click)="dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="chat-container-actions-container-send input-group input-group-sm">
+        <input class="form-control" type="text" [(ngModel)]="searchName">
+        <div class="input-group-append">
+            <button class="btn btn-secondary btn-sm" type="button" (click)="searchUser()">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="result.length > 0 && gotResult">
+        <div *ngFor="let user of result" style="display: flex; justify-content:space-between; ">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+                <img style="border-radius: 100%;width: 2rem;height: 2rem;object-fit: cover;"
+                    [attr.src]="user.avatar.length > 0 ? user.avatar : 'assets/images/base_avatar.png'">
+                <div>{{user.username}}</div>
+            </div>
+            <button class="btn btn-outline-primary" (click)="sendRequest()">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" (click)="dismiss()" class="btn btn-secondary">Done</button>
+</div>

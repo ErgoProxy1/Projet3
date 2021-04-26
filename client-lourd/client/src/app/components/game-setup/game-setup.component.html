@@ -1,0 +1,68 @@
+<div (click)="goToMenu()" class="game-setup-back clickable section p-1 menu-option">
+    <i class="fa fa-arrow-circle-left fa-3x icon-color"></i>
+</div>
+<div class="game-setup-avatar">
+    <app-avatar-menu [placement]="'bottom'" (disconnect)="disconnectUser()" (profile)="goToProfile()"></app-avatar-menu>
+ </div>
+<div class="game-setup bg-standard">
+    <div class="game-setup-container">
+        <form #creationForm="ngForm" (ngSubmit)="sendGameCreationRequest()">
+            <p class="game-setup-container-title">
+                <span class='game-setup-container-title-text'>
+                    Création d'une partie
+                </span>
+            </p>
+
+            <div class="mb-2" [style.font-family]="'roboto, Verdana, Geneva, Tahoma, sans-serif'">Mode de jeu</div>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="modeSelect" [(ngModel)]="gameMode">
+                <label ngbButtonLabel class="btn-secondary">
+                    <input ngbButton type="radio" [value]="0"> Classique
+                </label>
+                <label ngbButtonLabel class="btn-secondary">
+                    <input ngbButton type="radio" [value]="1"> Chacun pour soi
+                </label>
+            </div>
+
+            <div class="mt-3 mb-2" [style.font-family]="'roboto, Verdana, Geneva, Tahoma, sans-serif'"> Difficulté
+            </div>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="difficultySelect" [(ngModel)]="difficulty">
+                <label ngbButtonLabel class="btn-secondary">
+                    <input ngbButton type="radio" [value]="0"> Facile
+                </label>
+                <label ngbButtonLabel class="btn-secondary">
+                    <input ngbButton type="radio" [value]="1"> Normale
+                </label>
+                <label ngbButtonLabel class="btn-secondary">
+                    <input ngbButton type="radio" [value]="2"> Difficile
+                </label>
+            </div>
+
+            <!--<div class="custom-control custom-switch mt-3">
+                <input type="checkbox" class="custom-control-input clickable" id="powerToggle" name="powerToggle"
+                    [(ngModel)]="gotPower">
+                <label class="custom-control-label clickable" for="powerToggle">Activer les power-ups</label>
+            </div>-->
+
+            <div class="custom-control custom-switch mt-3">
+                <input type="checkbox" class="custom-control-input clickable" id="privateToggle" name="privateToggle"
+                    [(ngModel)]="isPrivate">
+                <label class="custom-control-label clickable" for="privateToggle">Partie Privée</label>
+            </div>
+
+            <div *ngIf="isPrivate">
+                <label class="mt-3" for="passwordInput">Mot de passe</label>
+                <div class="game-setup-container-password">
+                    <input class="form-control w-50" id="passwordInput" name="passwordInput" [attr.type]="showPassword ? 'text' : 'password'"
+                        [required]="isPrivate" [(ngModel)]=password>
+                    <i class="fa fa-eye fa-2x ml-2 mt-1" (mouseover)="showPassword = true" (mouseleave)="showPassword = false"></i>
+                </div>
+            </div>
+
+            <button class="btn btn-primary mt-3" type="submit" [disabled]="!creationForm.valid">Créer</button>
+        </form>
+    </div>
+</div>
+
+<div class="game-setup-chat">
+    <app-chat [isInAppWindow]="true" [isInGameZone]="false"></app-chat>
+</div>

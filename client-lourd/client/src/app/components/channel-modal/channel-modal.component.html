@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h5 class="modal-title">Joindre un Canal</h5>
+    <button type="button" class="close" (click)="dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body ">
+    <div style="height: 10rem; overflow-y: auto;" *ngFor="let c of channelsToShow; let i = index" style="display: flex; justify-content: space-between;">
+        <div>{{c.name}}</div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [id]="'channelToggle'+i" (change)="updateChannelsToJoin($event.target.checked, c.name)">
+            <label class="custom-control-label" [for]="'channelToggle'+i"></label>
+        </div>
+    </div>
+    <div *ngIf="channelsToShow.length === 0">
+        Auncun canal additionnel présent.
+    </div>
+    <div class="login-menu-container-form-error">
+        {{errorMessage}}
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" (click)="close()" class="btn btn-primary" [disabled]="channelsToJoin.length === 0">Confirmer</button>
+    <button type="button" (click)="dismiss()" class="btn btn-secondary">Annuler</button>
+</div>

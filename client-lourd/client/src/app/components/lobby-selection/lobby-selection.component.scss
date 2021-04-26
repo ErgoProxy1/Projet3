@@ -1,0 +1,51 @@
+.lobby-list {
+    height: 100%;
+    &-container {
+        margin-right: 25%;
+        margin-left: 25%;
+        height: 100%;
+
+        &-title {
+            padding-top: 5.5rem;
+            padding-bottom: 2rem;
+            text-align: center;
+            &-text {
+                font-size: 2rem;
+                font-weight: bold;
+                font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            }
+        }
+    }
+
+    &-lobby{
+        border: 1px solid #999999AA;
+        margin-bottom: 1rem;
+    }
+
+    &-back {
+        z-index: 2;
+        position: absolute;
+        top: 1rem;
+        left: 3rem;
+        border-radius: 100%;
+    }
+
+    &-avatar {
+        z-index: 2;
+        position: absolute;
+        top: 1rem;
+        right: 3rem;
+    }
+
+    &-error {
+        color: #dc3545;
+        font-size: small;
+    }
+
+    &-chat {
+        position: absolute;
+        right: 0;
+        bottom: 1rem;
+        width: 20%;
+    }
+}

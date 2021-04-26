@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h5 class="modal-title">Sélection d'avatar</h5>
+    <button type="button" class="close" (click)="dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div [style]="!hasLoaded ? 'display:flex;justify-content:center;align-items:center;' : ''">
+    <div *ngIf="!hasLoaded">
+        <fa-icon [icon]="faCircleNotch" [size]="'5x'" spin="true" class="icon-color"></fa-icon>
+    </div>
+    <div class="avatar-selection-container" *ngIf="hasLoaded">
+        <div class="" *ngFor="let image of images">
+            <img class="avatar-selection-container-image" [src]="image" [style.border]="selectedSrc === image ? '2px solid red' : ''" (click)="selectedSrc = image">
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" (click)="close()" class="btn btn-primary" [disabled]="selectedSrc.length === 0">Choisir</button>
+    <button type="button" (click)="dismiss()" class="btn btn-secondary">Annuler</button>
+</div>

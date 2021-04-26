@@ -1,0 +1,62 @@
+<!--DO NOT REMOVE [hidden], essential for coordination of windowed and ingame mode-->
+<div *ngIf="curChannel" class="chat-container bg-standard" [hidden]="!showChat" [style.height]="isInAppWindow ? '50%' : '100%'"
+    [style.max-height]="isInAppWindow ? '50%' : '100%'">
+    <div class="chat-container-header">
+        <div class="ml-1 custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="toggleHist" [(ngModel)]="showHistory" (ngModelChange)="updateShowHistory($event)">
+            <label class="custom-control-label" for="toggleHist">Historique</label>
+        </div>
+        <button class="btn btn-secondary btn-sm m-1" (click)="isInAppWindow ? openChatWindow() : closeChatWindow()">
+            <fa-icon [icon]="faExpand" size="1x" class="icon-color"></fa-icon>
+        </button>
+    </div>
+    <div #messagesContainer class="chat-container-messages"
+        [style.max-height]="((!isInGameZone && isInAppWindow) || (isInLobby && isInAppWindow)) ? '10rem' : ''">
+        <div *ngFor="let message of tempReceivedMessages; let i = index"
+            [style]="i < (tempReceivedMessages.length - 1) ? 'padding-bottom: 0.75rem;' : ''">
+            <div>{{message.username}} à {{message.formatedTime}}</div>
+            <div>{{message.text}}</div>
+        </div>
+    </div>
+    <div class="chat-container-actions">
+        <div class="chat-container-actions-container">
+            <div *ngIf="curChannel" class="chat-container-actions-container-channel input-group input-group-sm pb-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Canal</label>
+                </div>
+                <select class="custom-select" [(ngModel)]="curChannel" (ngModelChange)="onChangeChannel($event)">
+                    <ng-container *ngFor="let channel of channels">
+                        <option *ngIf="joinedChannels.includes(channel.name)"  [ngValue]="channel">
+                            {{channel.name}}
+                        </option>
+                    </ng-container>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary btn-sm" type="button" [ngbPopover]="plusButton" #pp="ngbPopover" container="body" [autoClose]="'outside'">
+                        <fa-icon [icon]="faPlus" size="1x" class="icon-color"></fa-icon>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm" type="button" container="body" placement="left" ngbTooltip="Quitter" [disabled]="curChannel.name === 'Tous' || curChannel.name === 'Global'"
+                    (click)="leaveChannel(curChannel)">
+                        <fa-icon [icon]="faMinus" size="1x" class="icon-color"></fa-icon>
+                    </button>
+                    <ng-template #plusButton>
+                        <a href="javascript:void(0);" (click)="pp.close();addChannel()">Ajouter un Canal</a>
+                        <br>
+                        <a href="javascript:void(0);" (click)="pp.close();joinChannel()">Joindre un Canal</a>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="chat-container-actions-container-send input-group input-group-sm">
+                <input class="form-control" placeholder="Aa" #messageInput type="text"
+                    (keyup.enter)="sendMessage(messageInput.value); messageInput.value = ''" maxlength="280"
+                    (focusin)="keyboard.inputFocusedActive = true" (focusout)="keyboard.inputFocusedActive = false">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary btn-sm" type="button"
+                        (click)="sendMessage(messageInput.value); messageInput.value = ''">
+                        <fa-icon [icon]="faSend" size="1x" class="icon-color"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

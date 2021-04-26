@@ -1,0 +1,137 @@
+<div (click)="goToMainMenu()" class="lobby-back clickable section p-1 menu-option">
+    <fa-icon [icon]="faArrowCircleLeft" [size]="'3x'" class="icon-color"></fa-icon>
+</div>
+<div class="lobby-avatar">
+    <app-avatar-menu [placement]="'bottom'" (disconnect)="disconnectUser()" (profile)="goToProfile()"></app-avatar-menu>
+</div>
+<div class="lobby bg-standard"
+    [style]="!hasFinishedLoading ? 'display:flex;justify-content:center;align-items:center;' : ''">
+    <div *ngIf="!hasFinishedLoading" class="bg-standard">
+        <fa-icon [icon]="faCircleNotch" [size]="'5x'" spin="true" class="icon-color"></fa-icon>
+    </div>
+    <div *ngIf="hasFinishedLoading" class="lobby-container">
+        <p class="lobby-container-title">
+            <span class='lobby-container-title-text'>
+                Salle d'attente de {{activeGame.host}}.
+            </span>
+        </p>
+        <div *ngIf="!gameExists" class="lobby-container-error">
+            <p style="margin: 50%"> La partie que vous chercher a joindre n'existe pas</p>
+        </div>
+
+        <div *ngIf="gameExists && activeGame.isClassic" class="lobby-container-content">
+            <div style="position: relative;" class="lobby-container-content-players rounded">
+                <h4 class="lobby-team-title" style="color: rgb(255, 70, 70)">Équipe 1</h4>
+                <div *ngFor="let player of team1" class="lobby-container-content-players-player">
+                    <img class="lobby-container-content-players-player-avatar"
+                        [attr.src]="player.avatar.length > 0 ? player.avatar : 'assets/images/base_avatar.png'">
+                    <div class="lobby-container-content-players-player-name pl-1"><i
+                            *ngIf="activeGame.host === player.name" class="fa fa-crown pr-1"></i>{{player.name}}</div>
+                    <div ngbDropdown container="body" class="lobby-container-content-players-player-action">
+                        <button class="btn btn-outline-secondary bg-standard btn-sm" ngbDropdownToggle>Actions</button>
+                        <div ngbDropdownMenu>
+                            <button ngbDropdownItem class="btn-sm"
+                                [disabled]="hasVotedToKick || (player.name === auth.username) || (activeGame.isClassic && activeGame.users.length <= 2) || (!activeGame.isClassic && activeGame.users.length < 3) || (player.name === activeGame.host) || (hasActiveVoteKick && player.name !== activeVoteKick.user) || hasValidPlayerCount()"
+                                (click)="voteKick(player.name)">Vote Expulser</button>
+                            <button ngbDropdownItem class="btn-sm"
+                                *ngIf="player.name !== activeGame.host && auth.username === activeGame.host"
+                                (click)="kickPlayer(player.name)">Expulser</button>
+                            <button ngbDropdownItem class="btn-sm" *ngIf="auth.username === activeGame.host"
+                                (click)="sendToOtherTeam(player.name)">Changer d'équipe</button>
+                        </div>
+                    </div>
+                </div>
+                <button *ngIf="auth.username === activeGame.host" [disabled]="teamHasBot[0] || team1.length > 1"
+                    style="position: absolute;bottom: 0.5rem;left: 0.5rem;" class="btn btn-primary"
+                    [ngbPopover]="botPopover" (shown)="curTeamSelectBot=0">+ Joueur Virtuel</button>
+            </div>
+
+            <div style="position: relative;" class="lobby-container-content-players rounded">
+                <h4 class="lobby-team-title" style="color: rgb(70, 70, 255)">Équipe 2</h4>
+                <div *ngFor="let player of team2" class="lobby-container-content-players-player">
+                    <img class="lobby-container-content-players-player-avatar"
+                        [attr.src]="player.avatar.length > 0 ? player.avatar : 'assets/images/base_avatar.png'">
+                    <div class="lobby-container-content-players-player-name pl-1"><i
+                            *ngIf="activeGame.host === player.name" class="fa fa-crown pr-1"></i>{{player.name}}</div>
+                    <div ngbDropdown container="body" class="lobby-container-content-players-player-action">
+                        <button class="btn btn-outline-secondary bg-standard btn-sm" ngbDropdownToggle>Actions</button>
+                        <div ngbDropdownMenu>
+                            <button ngbDropdownItem class="btn-sm"
+                                [disabled]="hasVotedToKick || (player.name === auth.username) || (activeGame.isClassic && activeGame.users.length <= 2) || (!activeGame.isClassic && activeGame.users.length < 3) || (player.name === activeGame.host) || (hasActiveVoteKick && player.name !== activeVoteKick.user) || hasValidPlayerCount()"
+                                (click)="voteKick(player.name)">Vote Expulser</button>
+                            <button ngbDropdownItem class="btn-sm"
+                                *ngIf="player.name !== activeGame.host && auth.username === activeGame.host"
+                                (click)="kickPlayer(player.name)">Expulser</button>
+                            <button ngbDropdownItem class="btn-sm" *ngIf="auth.username === activeGame.host"
+                                (click)="sendToOtherTeam(player.name)">Changer d'équipe</button>
+                        </div>
+                    </div>
+                </div>
+                <button *ngIf="auth.username === activeGame.host" [disabled]="teamHasBot[1] || team2.length > 1"
+                    style="position: absolute;bottom: 0.5rem;left: 0.5rem;" class="btn btn-primary"
+                    [ngbPopover]="botPopover" (shown)="curTeamSelectBot=1">+ Joueur Virtuel</button>
+            </div>
+        </div>
+
+        <div *ngIf="gameExists" class="lobby-container-content">
+            <div *ngIf="!activeGame.isClassic" class="lobby-container-content-players rounded">
+                <div *ngFor="let player of players" class="lobby-container-content-players-player">
+                    <img class="lobby-container-content-players-player-avatar"
+                        [attr.src]="player.avatar.length > 0 ? player.avatar : 'assets/images/base_avatar.png'">
+                    <div class="lobby-container-content-players-player-name pl-1"><i
+                            *ngIf="activeGame.host === player.name" class="fa fa-crown pr-1"></i>{{player.name}}</div>
+                    <div ngbDropdown container="body" class="lobby-container-content-players-player-action">
+                        <button class="btn btn-outline-secondary bg-standard btn-sm" ngbDropdownToggle>Actions</button>
+                        <div ngbDropdownMenu>
+                            <button ngbDropdownItem class="btn-sm"
+                                [disabled]="hasVotedToKick || (player.name === auth.username) || (activeGame.isClassic && activeGame.users.length <= 2) || (!activeGame.isClassic && activeGame.users.length < 3) || (player.name === activeGame.host) || (hasActiveVoteKick && player.name !== activeVoteKick.user)"
+                                (click)="voteKick(player.name)">Vote Expulser</button>
+                            <button ngbDropdownItem class="btn-sm"
+                                *ngIf="player.name !== activeGame.host && auth.username === activeGame.host"
+                                (click)="kickPlayer(player.name)">Expulser</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lobby-container-content-info">
+                <p>Nombre de Joueurs: {{activeGame.users.length}}/{{activeGame.isClassic ? '4' : '8'}}</p>
+                <p>Difficulté : {{getDifficulty(activeGame.difficulty)}}</p>
+                <p>Mode de jeux : {{activeGame.isClassic ? 'Classique' : 'Chacun pour soi'}}</p>
+                <p *ngIf="activeGame.password.length > 0">Mot de passe : {{activeGame.password}}</p>
+            </div>
+        </div>
+        <div *ngIf="hasActiveVoteKick">
+            <button class="btn btn-success btn-sm ml-2"
+                [disabled]="hasVotedToKick || (activeVoteKick.user === auth.username)"
+                (click)="voteKick(activeVoteKick.user)"><i class="fa fa-check"></i></button>
+            <span class="pl-2">Votes pour l'expulsion de
+                {{activeVoteKick.user}}:{{activeVoteKick.votes}}/{{kickCeiling(activeGame.users.length)}}</span>
+        </div>
+        <div *ngIf="hasActiveVoteKick"> <button class="btn btn-danger btn-sm ml-2"
+                [disabled]="hasVotedToKick || (activeVoteKick.user === auth.username)"
+                (click)="rejectKick(activeVoteKick.user)"><i class="fa fa-ban"></i></button>
+            <span class="pl-2">Votes contre l'expulsion de {{activeVoteKick.user}}:
+                {{activeVoteKick.rejections}}/{{activeGame.users.length - kickCeiling(activeGame.users.length)}}</span>
+        </div>
+        <button class="btn btn-primary mt-2" *ngIf="auth.username === activeGame.host" (click)="startButton()"
+            [disabled]="(activeGame.isClassic && activeGame.users.length < 2) || (!activeGame.isClassic && activeGame.users.length < 3) || (activeGame.isClassic && !teamsAreBalanced)">Débuter</button>
+    </div>
+</div>
+
+<div class="lobby-chat">
+    <app-chat [isInAppWindow]="true" [isInGameZone]="false" [isInLobby]="true"></app-chat>
+</div>
+
+<ng-template #botPopover>
+    <div class="pb-2" *ngFor="let bot of availableBots" style="display: flex; flex-direction: row; justify-content: space-between;align-items: center;">
+        <div style="font-family: roboto, Verdana, Geneva, Tahoma, sans-serif">
+            <div>{{bot.name}}</div>
+            <ng-container [ngSwitch]="bot.personality">
+                <div *ngSwitchCase="0">Gentille</div>
+                <div *ngSwitchCase="1">Neutre</div>
+                <div *ngSwitchCase="2">Méchant</div>
+            </ng-container>
+        </div>
+        <button (click)="addBot(bot.name)" class="btn btn-sm btn-primary ml-3" style="height:1.5rem; width:1.5rem;padding: 0 !important;"><i class="fa fa-plus"></i></button>
+    </div>
+</ng-template>

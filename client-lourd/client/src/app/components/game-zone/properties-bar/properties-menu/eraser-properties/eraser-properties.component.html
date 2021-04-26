@@ -1,0 +1,8 @@
+<div class="row">
+    <div class="col-md-12">
+        <small for="rangeSize">Grandeur : {{currentSize}} px</small>
+        <input id="sizeInput" type="range" class="custom-range custom-slider" [(ngModel)]="currentSize"
+            (change)="onChangeSize()" (input)="onChangeSize()" [min]="_MIN_ERASER_SIZE" [max]="_MAX_ERASER_SIZE"
+            step="1">
+    </div>
+</div>

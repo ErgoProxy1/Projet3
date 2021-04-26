@@ -1,0 +1,8 @@
+
+<div class="modal-body">
+    <h5 *ngIf="!maxIndexReached" >Indice #{{index}} : {{hint}}</h5>
+    <h5 *ngIf="maxIndexReached">Vous avez consulté tous les indices disponibles</h5>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="close()">Continuer</button>
+</div>

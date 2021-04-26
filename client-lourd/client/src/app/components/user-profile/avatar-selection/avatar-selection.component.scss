@@ -1,0 +1,15 @@
+.avatar-selection {
+    &-container {
+        display: flex;
+        flex-flow: row wrap;
+        align-content: space-between;
+        justify-content: space-between;
+        &-image {
+            cursor: pointer;
+            max-height: 5rem;
+            max-width: 5rem;
+            object-fit: contain;
+            margin: 1rem;
+        }
+    }
+}

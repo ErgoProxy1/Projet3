@@ -1,0 +1,85 @@
+.lobby {
+    height: 100%;
+    overflow-y: auto;
+    &-container {
+        margin-left: 25%;
+        margin-right: 25%;
+        padding-bottom: 1.5rem;
+        height: 100%;
+        padding-top: 5rem;
+        overflow-y: auto;
+        &-title {
+            text-align: center;
+            &-text {
+                font-size: 2rem;
+                font-weight: bold;
+                font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            }
+        }
+        &-content {
+            display: flex;
+            flex-direction: row;
+            &-players {
+                width: 20rem;
+                height: 30rem;
+                border: 1px solid #999999aa;
+                &-player {
+                    height: 12.5%;
+                    padding: 0.5rem;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    border-bottom: 1px solid #999999aa;
+
+                    &-avatar {
+                        border-radius: 100%;
+                        width: 2rem;
+                        height: 2rem;
+                        object-fit: cover;
+                    }
+
+                    &-name {
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+
+                    &-action {
+                        margin-left: auto;
+                    }
+                }
+            }
+
+            &-info {
+                padding-top:1em;
+                padding-left: 1rem;
+            }
+        }
+    }
+
+    &-back {
+        z-index: 2;
+        position: absolute;
+        top: 1rem;
+        left: 3rem;
+        border-radius: 100%;
+    }
+
+    &-avatar {
+        z-index: 2;
+        position: absolute;
+        top: 1rem;
+        right: 3rem;
+    }
+
+    &-team-title {
+        padding: 5%;
+    }
+
+    &-chat {
+        position: absolute;
+        right: 0;
+        bottom: 1rem;
+        width: 20%;
+    }
+}

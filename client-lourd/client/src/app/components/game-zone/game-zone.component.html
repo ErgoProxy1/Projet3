@@ -1,0 +1,39 @@
+<ngb-alert *ngIf="isMessageToShow" [dismissible]="isDismissable" class="popupMessage mt-2" [type]="typeOfMessage"
+  (closed)="isMessageToShow = false">{{popupMessage}}
+</ngb-alert>
+
+<ngb-alert style="position: fixed; bottom: 0.5rem; top:auto;" *ngIf="activeVoteKick && hasActiveVoteKick"
+  [dismissible]="false" class="popupMessage mt-2" type="dark" (closed)="isMessageToShow = false">
+  <div class="pb-2">
+    <button class="btn btn-success btn-sm ml-2" [disabled]="hasVotedToKick || (activeVoteKick.user === auth.username)"
+      (click)="voteKick(activeVoteKick.user)"><i class="fa fa-check"></i></button>
+    <span class="pl-2">Votes pour l'expulsion de
+      {{activeVoteKick.user}}:{{activeVoteKick.votes}}/{{kickCeiling(activeGame.users.length)}}</span>
+  </div>
+  <div> <button class="btn btn-danger btn-sm ml-2"
+      [disabled]="hasVotedToKick || (activeVoteKick.user === auth.username)"
+      (click)="rejectKick(activeVoteKick.user)"><i class="fa fa-ban"></i></button>
+    <span class="pl-2">Votes contre l'expulsion de {{activeVoteKick.user}}:
+      {{activeVoteKick.rejections}}/{{activeGame.users.length - kickCeiling(activeGame.users.length)}}</span>
+  </div>
+</ngb-alert>
+
+<div class="gridContainer" (window:resize)="resendDimensions()">
+  <app-horizontal-menu class="head bg-horizontale-bar"></app-horizontal-menu>
+  <app-side-bar class="toolbar bg-side-bar"></app-side-bar>
+  <app-properties-bar class="properties bg-standard"></app-properties-bar>
+  <div #workspace class="workspace" *ngIf="!gameHasEnd; else endGame">
+    <app-canvas></app-canvas>
+  </div>
+  <ng-template #endGame>
+    <app-end-screen style="background-color: lightgray;" class="workspace"></app-end-screen>
+  </ng-template>
+  <div class="right-aside bg-standard">
+    <app-chat [isInAppWindow]="true"></app-chat>
+    <app-players-list *ngIf="gameService.gameId.length > 0" [players]="players" [activeGame]="activeGame" [hasVotedToKick]="hasVotedToKick"
+      [activeVoteKick]="activeVoteKick" [hasActiveVoteKick]="hasActiveVoteKick" [team1]="team1Users" [teamHasBot]="teamHasBot" (kickPlayer)="kickPlayer($event)"
+      (voteKick)="voteKick($event)" (rejectKick)="rejectKick($event)">
+    </app-players-list>
+  </div>
+</div>
+<!--<app-welcome-message></app-welcome-message>-->

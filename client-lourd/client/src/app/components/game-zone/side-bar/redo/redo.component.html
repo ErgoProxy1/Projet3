@@ -1,0 +1,6 @@
+<div *ngIf="controller.canRedo()">
+    <i class="icon-color fas fa-redo align-middle" [class.fa-2x]="innerWidth >= 1024" [class.fa-lg]="innerWidth < 1024"></i>
+</div>
+<div *ngIf="!controller.canRedo()" class="redo-button">
+    <i class="icon-color-disabled fas fa-redo align-middle" [class.fa-2x]="innerWidth >= 1024" [class.fa-lg]="innerWidth < 1024"></i>
+</div>

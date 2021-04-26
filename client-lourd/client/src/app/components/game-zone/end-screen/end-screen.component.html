@@ -1,0 +1,54 @@
+<div style="width: 100%; height: 100%; background-color: lightgray;">
+    <div style="text-align: center;">Tableau Récapitulatif</div>
+    <div style="text-align: center;">
+        <span *ngIf="winners.length > 1">Gagnants :</span>
+        <span *ngIf="winners.length <= 1">Gagnant :</span>
+        <li *ngFor="let winner of winners; last as isLast" style="display: inline;">
+            <div style="display: inline;">{{winner}}</div>
+            <div style="display: inline;" *ngIf="!isLast">, </div>
+        </li>
+    </div>
+    <div>
+        <div style="width: 80%;">
+            <table id="drawingHolder" style="width:100%; display: table; border: 1px solid black; float: left;">
+                <ng-container *ngFor="let user of users">
+                    <th style="border: 1px solid black; text-align: center !important;"
+                        [style.width.%]="100/users.length">{{user}}</th>
+                </ng-container>
+                <ng-container *ngFor="let tableRound of tableWordDraw; index as round">
+                    <tr style="border: 1px solid black;">
+                        <ng-container *ngFor="let tableWord of tableRound; index as player">
+                            <td style="border: 1px solid black;">
+                                <div *ngIf="isLoad; else elseLoad" id="{{round}}{{player}}">
+                                    <div style="width: 100%; text-align: center;">{{tableWord}}</div>
+                                    <svg viewBox="0 0 800 600" [style.background-color]="tableBgColors[round][player]">
+                                        <g *ngFor="let path of tableSVG[round][player]">
+                                            <path [attr.d]="path.commandSvg" [attr.stroke-width]="path.strokeWidth"
+                                                fill="none" stroke-linejoin="round" stroke-linecap="round"
+                                                [attr.stroke]="'rgba(' + path.strokeColor.r.toString() +',' + path.strokeColor.g.toString() +',' + path.strokeColor.b.toString() +',' + path.strokeColor.a.toString() +')'">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <ng-template #elseLoad>
+                                    <img src="assets/images/Spinner-2.6s-200px.svg">
+                                </ng-template>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+            </table>
+        </div>
+        <div id="usersList">
+            <div class="pt-2 pl-1">
+                <span class="pl-1">Deviné par:</span>
+                <div *ngFor="let user of users; index as i" class="btn btn-sm ml-1 mb-1"
+                    [class.btn-outline-secondary]="i !== curSelectedGuesser"
+                    [class.btn-secondary]="i === curSelectedGuesser" (click)="manageWordGuessBy(i)">
+                    <div>{{user}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button (click)="goesToMenu()" class="btn btn-primary ml-1 mt-1">Finir</button>
+</div>

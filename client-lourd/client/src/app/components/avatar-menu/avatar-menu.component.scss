@@ -1,0 +1,43 @@
+.avatar-menu {
+    &-container {
+        position: relative;
+        display: inline-block;
+
+        &-image {
+            object-fit: cover;
+            border-radius: 100%;
+
+            &:hover {
+                cursor: pointer;
+                border: 1px solid #DC3B16;
+            }
+        }
+
+        &-active {
+            background: #99cc00;
+            border: 2px solid white;
+            position: absolute;
+            bottom: 2%;
+            right: 2%;
+            border-radius: 100%;
+        }
+
+        &-disturb {
+            background: #cc4100;;
+            border: 2px solid white;
+            position: absolute;
+            bottom: 2%;
+            right: 2%;
+            border-radius: 100%;
+        }
+    }
+
+    &-popover{
+        &-action{
+            &:hover{
+                color:#525552;
+                cursor: pointer;
+            }
+        }
+    }
+}

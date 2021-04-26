@@ -1,0 +1,25 @@
+<div class="horizontal-menu" (click)="resetKeyboardService()">
+  <div class="horizontal-menu-container p-0">
+    <div (click)="goToMenu()" class="clickable section p-1 menu-option">
+      <fa-icon [icon]="faArrowCircleLeft" [size]="'2x'" class="icon-color"></fa-icon>
+    </div>
+    <ng-container *ngIf="game.gameId.length > 0">
+      <div class="clock">{{secondsRemaining}} s</div>
+      <div *ngIf="!game.isInRelaunch && game.waitingOnAnotherUser && game.allLoaded">Ronde {{game.curRound}} | {{game.curDrawer}} choisit un mot</div>
+      <div *ngIf="!game.isInRelaunch && game.curDrawer!==auth.username && !game.waitingOnAnotherUser && game.allLoaded">Ronde {{game.curRound}} | {{game.curDrawer}} dessine</div>
+      <div *ngIf="!game.isInRelaunch && game.curDrawer===auth.username && !game.isPickingWord && game.allLoaded">Ronde {{game.curRound}} | C'est à votre tour de dessiner ! Votre mot :
+        {{game.curWord.length > 0 ? game.curWord : ''}}</div>
+      <div *ngIf="!game.allLoaded">En attente des autres joueurs...</div>
+    </ng-container>
+    <div *ngIf="game.isCreatingWordPair">
+      Création de paire mot-image
+    </div>
+    <div *ngIf="game.isCreatingAvatar">
+      Création d'avatar
+    </div>
+    <div *ngIf="game.isInRelaunch && game.belongsToRelaunchingTeam">Ronde {{game.curRound}} |Votre équipe a un droit de réplique !</div>
+    <div *ngIf="game.isInRelaunch && !game.belongsToRelaunchingTeam">Ronde {{game.curRound}} | L'autre équipe a un droit de réplique !</div>
+    <app-avatar-menu class="horizontal-menu-container-stick-right" [placement]="'left-top'" [imageDimension]="'2.25rem'"
+      [statusDimension]="'0.5rem'" (disconnect)="disconnectUser()" (profile)="goToProfile()"></app-avatar-menu>
+  </div>
+</div>

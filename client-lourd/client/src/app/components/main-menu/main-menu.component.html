@@ -1,0 +1,46 @@
+<div (click)="disconnectUser()" class="main-menu-logout clickable section p-1 menu-option">
+    <fa-icon [icon]="faArrowCircleLeft" [size]="'3x'" class="icon-color"></fa-icon>
+</div>
+<div class="main-menu-avatar">
+    <app-avatar-menu [placement]="'bottom'" (disconnect)="disconnectUser()" (profile)="goToProfile()"></app-avatar-menu>
+</div>
+<div class="main-menu bg-standard">
+    <div class="main-menu-container">
+        <p class="main-menu-container-title">
+            <span class='main-menu-container-title-text'>
+                Fais-moi un Dessin!
+            </span>
+        </p>
+        <p class="main-menu-container-sub">
+            <span class='main-menu-container-sub-text'>
+                Bienvenue {{auth.username}}!
+            </span>
+        </p>
+        <div class="main-menu-container-buttons">
+            <div class="pb-3">
+                <a class="btn btn-secondary btn-lg btn-block" role="button" [routerLink]="gameSetupRoute">Créer une
+                    partie</a>
+            </div>
+            <div class="pb-3">
+                <a class="btn btn-secondary btn-lg btn-block" role="button" [routerLink]="selectLobbyRoute">Joindre une
+                    partie</a>
+            </div>
+            <div class="pb-3">
+                <a class="btn btn-secondary btn-lg btn-block" role="button" (click)="startWordCreator()"
+                    href="javascript:void(0);">Création d'une paire mot-image</a>
+            </div>
+            <div class="pb-3">
+                <a class="btn btn-secondary btn-lg btn-block" role="button" (click)="startTutorial()"
+                    href="javascript:void(0);">Comment Jouer</a>
+            </div>
+            <div>
+                <a class="btn btn-secondary btn-lg btn-block" role="button" href="javascript:void(0);"
+                    (click)="socialMenu()">Social</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-menu-chat">
+    <app-chat [isInAppWindow]="true" [isInGameZone]="false"></app-chat>
+</div>

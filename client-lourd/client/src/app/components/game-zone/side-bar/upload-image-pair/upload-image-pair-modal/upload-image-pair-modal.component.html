@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h5 class="modal-title">Téléversement</h5>
+    <button type="button" class="close" (click)="dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <button class="btn btn-secondary" (click)="imgInput.click()">Téléverser</button>
+        <div *ngIf="image">Image Reçu!</div>
+    </div>
+    <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="toggleadv" [(ngModel)]="showAdvanced">
+        <label class="custom-control-label" for="toggleadv">Options Avancées</label>
+    </div>
+    <div *ngIf="showAdvanced">
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="toggleOptimize" [(ngModel)]="optCurve">
+            <label class="custom-control-label" for="toggleOptimize">Optimization des courbes</label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="toggleThresh" [(ngModel)]="defineThreshold">
+            <label class="custom-control-label" for="toggleThresh">Définir seuil de tolérence</label>
+        </div>
+        <div *ngIf="defineThreshold">
+            <label class="mt-1" for="thresholdInput">Seuil de tolérence colorimétrique</label>
+            <div class="input-group">
+                <input type="number" min="0" max="255" id="thresholdInput" class="form-control" name="thresholdInput" [(ngModel)]="threshold">
+            </div>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="toggletured" [(ngModel)]="defineTurdSize">
+            <label class="custom-control-label" for="toggletured">Définir taille des mouchetures</label>
+        </div>
+        <div *ngIf="defineTurdSize">
+            <label class="mt-1" for="inputTurd">Taille des mouchetures</label>
+            <div class="input-group">
+                <input type="number" min="0.1" max="100" step="0.1" type="number" id="inputTurd" class="form-control" name="inputTurd"  [(ngModel)]="turdSize">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" (click)="close()" class="btn btn-primary" [disabled]="!image">Upload</button>
+    <button type="button" (click)="dismiss()" class="btn btn-secondary">Cancel</button>
+</div>
+<input hidden #imgInput type="file" id="img" name="img" accept=".png, .jpg, .jpeg, .bmp"
+    (input)="uploadFile($event.target.files); imgInput.value='';">

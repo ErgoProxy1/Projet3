@@ -1,0 +1,42 @@
+<div class="players-list">
+    <div class="players-list-container">
+        <div style="position: relative;" *ngFor="let player of players; let i = index"
+            class="players-list-container-player"
+            [style.border-left]="activeGame.isClassic ? (team1.includes(player.name) ? '0.25rem solid rgb(255, 70, 70)' : '0.25rem solid rgb(70, 70, 255)') : ''"
+            #reaction="ngbPopover" [ngbPopover]="reactTemp" [autoClose]="false" triggers="manual" container="body"
+            placement="left">
+            <img class="players-list-container-player-avatar"
+                [attr.src]="player.avatar.length > 0 ? player.avatar : 'assets/images/base_avatar.png'" placement="left"
+                [ngbTooltip]="playerInfoTemplate" triggers="hover" container="body">
+            <ng-template #playerInfoTemplate>
+                <div>{{player.name}}</div>
+                <div>{{player.points}} points</div>
+            </ng-template>
+            <ng-template #reactTemp>
+                <i *ngIf="playersLikeReacting.includes(player.name)" style="color: #28a745"
+                    class="fa fa-thumbs-up fa-2x"></i>
+                <i *ngIf="playersDislikeReacting.includes(player.name)" style="color: #dc3545"
+                    class="fa fa-thumbs-down fa-2x"></i>
+            </ng-template>
+            <div class="pl-2">
+                <div class="players-list-container-player-text">
+                    <i *ngIf="activeGame.host === player.name" class="fa fa-crown pr-1"></i>
+                    {{player.name}}
+                </div>
+                <div class="players-list-container-player-text">{{player.points}} points</div>
+            </div>
+            <div ngbDropdown container="body" class="players-list-container-player-action">
+                <button class="btn btn-outline-secondary bg-standard btn-xs" ngbDropdownToggle>Actions</button>
+                <div ngbDropdownMenu>
+                    <button ngbDropdownItem class="btn-sm"
+                        [disabled]="hasVotedToKick || (player.name === auth.username) || (activeGame.isClassic && activeGame.users.length <= 2) || (!activeGame.isClassic && activeGame.users.length < 3) || (player.name === activeGame.host) || (hasActiveVoteKick && player.name !== activeVoteKick.user) || hasValidPlayerCount()"
+                        (click)="voteKick.emit(player.name)">
+                        Vote Expulser</button>
+                    <button ngbDropdownItem class="btn-sm"
+                        *ngIf="player.name !== activeGame.host && auth.username === activeGame.host"
+                        (click)="kickPlayer.emit(player.name)">Expulser</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

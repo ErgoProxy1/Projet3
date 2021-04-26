@@ -1,0 +1,6 @@
+<div class="text-center p-0 button">
+    <i class="icon-color fas fa-file-upload align-middle" [class.fa-2x]="innerWidth >= 1024" [class.fa-lg]="innerWidth < 1024"></i>
+</div>
+
+<canvas #canvasSim class="canvasSim" [attr.width]="exportInfo.dimensions[0]"
+  [attr.height]="exportInfo.dimensions[1]"></canvas>

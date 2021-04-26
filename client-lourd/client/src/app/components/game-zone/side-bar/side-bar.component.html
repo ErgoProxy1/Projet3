@@ -1,0 +1,46 @@
+<div class="gridContainer">
+  <div class="grid-item border-top border-bottom">
+
+    <div class="grid-item border-bottom">
+      <app-pencil-button class="clickable section p-1 menu-option" (click)="routeToPencil(auth.username === game.curDrawer || tutorial.hasStarted() || game.gameId.length === 0)"
+      [class.toolSelected]="getIsToolSelected('pencil')" [class.icon-color-disabled]="auth.username !== game.curDrawer && !tutorial.hasStarted() && game.gameId.length > 0" placement="right" [innerWidth]="innerWidth" ngbTooltip="Crayon (c)"></app-pencil-button>
+    </div>
+
+    <div class="grid-item border-top border-bottom">
+      <app-eraser-button class="clickable section p-1 menu-option" (click)="routeToEraser(auth.username === game.curDrawer || tutorial.hasStarted() || game.gameId.length === 0)"
+        [class.toolSelected]="getIsToolSelected('eraser')" [class.icon-color-disabled]="auth.username !== game.curDrawer && !tutorial.hasStarted() && game.gameId.length > 0" placement="right" [innerWidth]="innerWidth" ngbTooltip="Efface (e)">
+      </app-eraser-button>
+    </div>
+
+    <div class="grid-item border-top border-bottom">
+      <app-grid-button class="clickable section p-1 menu-option" (click)="routeToGrid(auth.username === game.curDrawer || tutorial.hasStarted() || game.gameId.length === 0)"
+        [class.toolSelected]="getIsToolSelected('grid')" [class.icon-color-disabled]="auth.username !== game.curDrawer && !tutorial.hasStarted() && game.gameId.length > 0" placement="right" [innerWidth]="innerWidth" ngbTooltip="Afficher la grille (g)">
+      </app-grid-button>
+    </div>
+
+    <div class="grid-item border-top border-bottom">
+      <app-undo class="clickable section p-1 menu-option" placement="right" [innerWidth]="innerWidth" ngbTooltip="Annuler (Ctrl+Z)" [click]="undoSubject" (click)="undoSubject.next()">
+      </app-undo>
+    </div>
+
+    <div class="grid-item border-top">
+      <app-redo class="clickable section p-1 menu-option" placement="right" [innerWidth]="innerWidth" ngbTooltip="Refaire (Ctrl+Shift+Z)" [click]="redoSubject" (click)="redoSubject.next()">
+      </app-redo>
+    </div>
+
+    <div class="grid-item border-top border-bottom" *ngIf="game.isCreatingWordPair">
+      <app-upload-image-for-pair class="clickable section p-1 menu-option" placement="right" [innerWidth]="innerWidth" ngbTooltip="Téléverser une image" [click]="uploadImageSubject" (click)="uploadImageSubject.next()">
+      </app-upload-image-for-pair>
+    </div>
+
+    <div class="grid-item border-top border-bottom" *ngIf="game.isCreatingWordPair">
+      <app-finish-word-pair class="clickable section p-1 menu-option" placement="right" [innerWidth]="innerWidth" ngbTooltip="Finaliser paire mot-image" [click]="finishPairSubject" (click)="finishPairSubject.next()">
+      </app-finish-word-pair>
+    </div>
+
+    <div class="grid-item border-top border-bottom">
+      <app-avatar-convert class="clickable section p-1 menu-option" placement="right" [innerWidth]="innerWidth" ngbTooltip="Mettre canvas comme avatar" [click]="avatarSetSubject" (click)="avatarSetSubject.next()">
+      </app-avatar-convert>
+    </div>
+
+  </div>

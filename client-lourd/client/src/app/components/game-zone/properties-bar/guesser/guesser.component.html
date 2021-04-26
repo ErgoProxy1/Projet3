@@ -1,0 +1,30 @@
+<h4 style="color: red;" *ngIf="tutorial.curState === 8">Devinez Ici!</h4>
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="Le mot est..." #attemptInput
+        (keyup.enter)="sendAttempt(attemptInput.value); attemptInput.value = ''"
+        [disabled]="(gameMana.isInRelaunch && !gameMana.belongsToRelaunchingTeam) || (auth.username === gameMana.curDrawer && !tutorial.hasStarted()) || (gameMana.gameMode === 0 && !gameMana.isInRelaunch && !gameMana.belongsToTeamPlaying) ||gameMana.hasGuessed || gameMana.waitingOnAnotherUser"
+        (focusin)="keyboard.inputFocusedActive = true" (focusout)="keyboard.inputFocusedActive = false">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary btn-sm" type="button"
+            (click)="sendAttempt(attemptInput.value); attemptInput.value = ''"
+            [disabled]="(gameMana.isInRelaunch && !gameMana.belongsToRelaunchingTeam) || (auth.username === gameMana.curDrawer && !tutorial.hasStarted()) || (gameMana.gameMode === 0 && !gameMana.isInRelaunch && !gameMana.belongsToTeamPlaying) || gameMana.hasGuessed || gameMana.waitingOnAnotherUser">
+            <i class="fa fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+<button class="btn btn-outline-secondary btn-sm mt-2" type="button" (click)="displayHint()"
+    [disabled]="(gameMana.isInRelaunch) || (auth.username === gameMana.curDrawer && !tutorial.hasStarted()) || (gameMana.gameMode === 0 && !gameMana.belongsToTeamPlaying) || gameMana.hasGuessed || gameMana.waitingOnAnotherUser"
+    placement="right" container="body" triggers="hover" ngbTooltip="Demander un Indice">
+    <i class="fa fa-question-circle"></i>
+</button>
+<button class="btn btn-outline-success btn-sm mt-2" type="button" (click)="like()"
+    [disabled]="disableReact">
+    <i class="fa fa-thumbs-up"></i>
+</button>
+<button class="btn btn-outline-danger btn-sm mt-2" type="button" (click)="dislike()"
+    [disabled]="disableReact">
+    <i class="fa fa-thumbs-down"></i>
+</button>
+<div *ngIf="showTutorialHint">Indice: C'est une pomme...</div>
+<div *ngIf="correct" style="color: #28a745">Correct!</div>
+<div *ngIf="incorrect" style="color: #dc3545;">Incorrect...</div>

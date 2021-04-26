@@ -1,0 +1,39 @@
+//---------- Grid Items ----------//
+.head{
+    grid-area:head;
+}
+
+.toolbar{
+    grid-area:toolbar;
+}
+
+.properties{
+    grid-area:properties;
+    overflow-y: auto;
+}
+
+.workspace{
+    grid-area:workspace;
+    background-color:#ffffff;
+    overflow: auto;
+}
+
+.right-menu{
+    grid-area: right-menu;
+}
+
+.gridContainer{
+    display:grid;
+    grid-template-areas:
+    "head head head head"
+    "toolbar properties workspace right-menu";
+    grid-template-columns: minmax(32px, 4fr) minmax(128px, 14fr) minmax(618px, 65fr) minmax(157px, 17fr);
+    grid-template-rows: minmax(30px, 5fr) minmax(500px, 95fr);
+    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+    background-color:#ffffff;
+    z-index: 0;
+}

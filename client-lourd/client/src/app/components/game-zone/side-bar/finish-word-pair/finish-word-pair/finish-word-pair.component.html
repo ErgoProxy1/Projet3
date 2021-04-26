@@ -1,0 +1,6 @@
+<div class="text-center p-0 button" *ngIf="controller.svgPrimitives.length > 0">
+    <i style="color: #28a745" class="fas fa-check align-middle" [class.fa-2x]="innerWidth >= 1024" [class.fa-lg]="innerWidth < 1024"></i>
+</div>
+<div class="text-center p-0 button" *ngIf="controller.svgPrimitives.length === 0">
+    <i class="icon-color-disabled fas fa-check align-middle" [class.fa-2x]="innerWidth >= 1024" [class.fa-lg]="innerWidth < 1024"></i>
+</div>

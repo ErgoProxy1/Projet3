@@ -1,0 +1,30 @@
+<div class="avatar-menu">
+  <div class="avatar-menu-container">
+    <img class='avatar-menu-container-image' [style.width]="imageDimension" [style.height]="imageDimension"
+      [attr.src]="auth.avatarSrc.length > 0 ? auth.avatarSrc : 'assets/images/base_avatar.png'" [placement]="placement"
+      container="body" [ngbPopover]="userPopover" [popoverTitle]="popTitle">
+    <span *ngIf="!isDoNotDisturb" class='avatar-menu-container-active' placement="auto" container="body" ngbTooltip="En ligne"
+      [style.width]="statusDimension" [style.height]="statusDimension"></span>
+    <span *ngIf="isDoNotDisturb" class='avatar-menu-container-disturb' placement="auto" container="body" ngbTooltip="En ligne"
+      [style.width]="statusDimension" [style.height]="statusDimension"></span>
+  </div>
+</div>
+
+<ng-template #popTitle>
+  <div style="text-align: center;">{{auth.username}}</div>
+</ng-template>
+<ng-template #userPopover>
+  <div class="horizontal-menu-container-avatar-popover">
+    <div class="horizontal-menu-container-avatar-popover-action">
+      <a (click)="profile.emit()" href="javascript:void(0);">Profil</a>
+    </div>
+    <div class="horizontal-menu-container-avatar-popover-action">
+      <a (click)="disconnect.emit()" href="javascript:void(0);">Déconnexion</a>
+    </div>
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input clickable" id="dndSwitch" name="dndSwitch1"
+          [(ngModel)]="isDoNotDisturb" (ngModelChange)="toggleDoNotDisturb()">
+      <label class="custom-control-label clickable" for="dndSwitch">Ne pas déranger</label>
+  </div>
+  </div>
+</ng-template>

@@ -1,0 +1,11 @@
+.custom-control-input:checked~.custom-control-label::before{
+    border-color: #DC3B16;
+    background-color: #DC3B16;
+    color: #DC3B16;
+    box-shadow: none;
+}
+
+.custom-switch .custom-control-label::before{
+    box-shadow: none;
+    border: none;
+}

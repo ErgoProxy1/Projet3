@@ -1,0 +1,3 @@
+<ngb-alert *ngIf="isMessageToShow" [dismissible]="isDismissable" class="popupMessage mt-2" [type]="typeOfMessage" (closed)="isMessageToShow = false">{{popupMessage}}
+</ngb-alert>
+<router-outlet></router-outlet>

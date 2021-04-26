@@ -1,0 +1,30 @@
+<div class="row form-inline mt-3">
+  <small class="col-md-7 ">Grandeur carré</small>
+  <input id="squareSizeNumber" class="col-md-4 form-control form-control-sm text-small" type="number"
+    [min]="MIN_SQUARE_SIZE" [max]="MAX_SQUARE_SIZE" step="1" [(ngModel)]="sizeOfSquare" (input)="onSquareChange()"
+    (focusout)="onSquareChange()">
+  <input id="squareSizeRange" type="range" class="custom-range col-md-10 offset-1 mt-1 custom-slider"
+    [(ngModel)]="sizeOfSquare" (input)="onSquareChange()" [min]="MIN_SQUARE_SIZE" [max]="MAX_SQUARE_SIZE" step="1">
+</div>
+
+<div class="row form-inline mt-3">
+  <small class="col-md-7 ">Transparence</small>
+  <input id="squareAlphaNumber" class="col-md-4 form-control form-control-sm text-small" type="number"
+    [min]="MIN_TRANSPARENCY" [max]="MAX_TRANSPARENCY" step="0.01" [(ngModel)]="gridInfo.colorStroke.a"
+    (input)="onSquareChange()" (focusout)="onSquareChange()">
+  <input id="squareAlphaRange" type="range" class="custom-range col-md-10 offset-1 mt-1 custom-slider"
+    [(ngModel)]="gridInfo.colorStroke.a" (input)="onSquareChange()" [min]="MIN_TRANSPARENCY" [max]="MAX_TRANSPARENCY"
+    step="0.01">
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+    <form>
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input clickable" id="switchGrid" name="show"
+          [(ngModel)]="gridInfo.toShow" (ngModelChange)="onToggleGrid()">
+        <label class="custom-control-label clickable" for="switchGrid">Afficher la grille</label>
+      </div>
+    </form>
+  </div>
+</div>

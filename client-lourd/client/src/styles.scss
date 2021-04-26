@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+p,
+button,
+input,
+label {
+  font-family: roboto, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.menu-option {
+  color: #90c6cb;
+}
+
+.menu-option:hover {
+  background-color: #dc3b16;
+}
+
+.toolSelected,
+.toolSelected:hover {
+  color: #dc3b16;
+  background-color: #292a29;
+  border-right-style: solid;
+  border-right-width: 5px;
+}
+
+.bg-horizontale-bar {
+  background-color: #292a29;
+}
+.bg-side-bar {
+  background-color: #292a29;
+}
+.bg-standard {
+  color: #90c6cb;
+  background-color: #525552;
+}
+
+.color-blue {
+  border-color: #90c6cb;
+  background-color: #90c6cb;
+  color: black;
+}
+
+.popupMessage {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  // Valeur 1051 pour être au-dessus des fenêtres modales dont le z-index est 1050
+  z-index: 1051 !important;
+}
+
+.icon-color-disabled {
+  color: rgb(83, 107, 109);
+}
+
+.custom-slider::-webkit-slider-thumb {
+  background-color: #dc3b16;
+}
+
+.custom-slider::-moz-range-thumb {
+  background-color: #dc3b16;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #3b3d3b;
+  border-radius: 0.75rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 0.75rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(110, 110, 110);
+  border-radius: 0.75rem;
+}
+
+.btn-group-xs > .btn, .btn-xs {
+  padding: .4rem .4rem;
+  font-size: .75rem;
+  line-height: .5;
+  border-radius: .2rem;
+}

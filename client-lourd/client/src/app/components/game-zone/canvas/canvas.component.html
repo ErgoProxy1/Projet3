@@ -1,0 +1,34 @@
+<div [style.height.%]="100" [style.width.%]="100" style="display:flex;justify-content:center;align-items:center;background-color:rgb(137, 141, 137);">
+    <div #canvas [style.height.px]="canvasHeight" [style.width.px]="canvasWidth"
+        [style.background-color]="canvasBackground" (mousedown)="mouseDownOnCanvas($event);"
+        (mouseleave)="mouseLeaveCanvas($event);" (mouseup)="mouseUpOnCanvas($event);"
+        (mousemove)="mouseMoveOnCanvas($event);" (click)="clickOnCanvas($event);"
+        (contextmenu)="clickOnCanvas($event);" >
+
+        <svg #svgPrimitives class="svgContainer" [attr.viewBox]="viewBox" [attr.width]="canvasWidth"
+            [attr.height]="canvasHeight" [style.background-color]="canvasBackground">
+
+            <g *ngIf="gridInfo.toShow && !screenShoting">
+                <line *ngFor="let dummy of numberOfSquareWidth | nTimes, let n = index"
+                    [attr.x1]="(n+1)*gridInfo.sizeOfSquare()" y1="0" [attr.x2]="(n+1)*gridInfo.sizeOfSquare()"
+                    [attr.y2]="ratioHeight" [attr.stroke]="gridInfo.colorStroke.asString()" [attr.stroke-width]="2" />
+                <line *ngFor="let dummy of numberOfSquareHeight | nTimes, let n = index" [attr.x1]="0"
+                    [attr.y1]="(n+1)*gridInfo.sizeOfSquare()" [attr.x2]="ratioWidth"
+                    [attr.y2]="(n+1)*gridInfo.sizeOfSquare()" [attr.stroke]="gridInfo.colorStroke.asString()"
+                    [attr.stroke-width]="2" />
+            </g>
+            <g app-svg #svgPrimitivesFixe [primitives]="controller.svgPrimitives"
+                (mouseDown)="mouseDownOnCanvas($event[0],$event[1]);"
+                (mouseUp)="mouseUpOnCanvas($event[0],$event[1]);"
+                (mouseMove)="mouseMoveOnCanvas($event[0],$event[1]);" (click)="clickOnCanvas($event[0],$event[1]);">
+            </g>
+            <g app-svg #svgPrimitivesTemporaires [primitives]="controller.temporaryPrimitives"
+                (mouseDown)="mouseDownOnCanvas($event[0],$event[1]);"
+                (mouseUp)="mouseUpOnCanvas($event[0],$event[1]);"
+                (mouseMove)="mouseMoveOnCanvas($event[0],$event[1]);" (click)="clickOnCanvas($event[0],$event[1]);">
+            </g>
+            <g app-svg #svgPrimitivesTemporairesSocket [primitives]="temporarySocketPrimitives">
+            </g>
+        </svg>
+    </div>
+</div>

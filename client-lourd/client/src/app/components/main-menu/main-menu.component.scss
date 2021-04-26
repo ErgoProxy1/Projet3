@@ -1,0 +1,56 @@
+.main-menu {
+    height: 100%;
+    &-container {
+        margin-right: 20%;
+        margin-left: 20%;
+        height: 100%;
+        overflow-y: auto;
+        &-title {
+            padding-top: 7.5rem;
+            text-align: center;
+            &-text {
+                font-size: 2rem;
+                font-weight: bold;
+                font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            }
+        }
+
+        &-sub {
+            padding-top: 1rem;
+            text-align: center;
+            &-text {
+                font-size: 1.5rem;
+                font-weight: bold;
+                font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            }
+        }
+
+        &-buttons {
+            margin-top: 6rem;
+            margin-left: 5rem;
+            margin-right: 5rem;
+        }
+    }
+
+    &-logout {
+        z-index: 2;
+        position: absolute;
+        top: 1rem;
+        left: 3rem;
+        border-radius: 100%;
+    }
+
+    &-avatar {
+        z-index: 2;
+        position: absolute;
+        top: 1rem;
+        right: 3rem;
+    }
+
+    &-chat {
+        position: absolute;
+        right: 0;
+        bottom: 1rem;
+        width: 20%;
+    }
+}

@@ -1,0 +1,6 @@
+<div *ngIf="controller.canUndo()">
+  <i class="icon-color fas fa-undo align-middle" [class.fa-2x]="innerWidth >= 1024" [class.fa-lg]="innerWidth < 1024"></i>
+</div>
+<div *ngIf="!controller.canUndo()">
+  <i class="icon-color-disabled fas fa-undo align-middle" [class.fa-2x]="innerWidth >= 1024" [class.fa-lg]="innerWidth < 1024"></i>
+</div>

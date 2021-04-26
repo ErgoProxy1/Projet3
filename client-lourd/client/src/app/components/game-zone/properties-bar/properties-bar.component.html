@@ -1,0 +1,40 @@
+<div class="container">
+  <div class=" properties">
+    <div class="row">
+      <div class="col-md-12">
+        <h6 class="border-bottom">Propriétés</h6>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+  <div class="colors">
+    <div class="row">
+      <div class="col-md-12 color-title">
+        <h6 class="border-bottom">Couleurs</h6>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <app-color-tool></app-color-tool>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="gameService.gameId.length > 0 || tutorial.curState === 8" class="colors">
+    <div class="row">
+      <div class="col-md-12 color-title">
+        <h6 class="border-bottom">Devinage</h6>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <app-guesser></app-guesser>
+      </div>
+    </div>
+  </div>
+</div>

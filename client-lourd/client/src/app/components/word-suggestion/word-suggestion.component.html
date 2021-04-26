@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h5>Choisissez un mot / expression à dessiner</h5>
+    <h5>{{clock}} s</h5>
+</div>
+<div class="modal-body">
+    <input type="radio" id="word1" name="word" value="0" [(ngModel)]="this.selectionIndex" (change)="this.chooseWord()">
+  <label for="word1" class="label">{{wordSuggestions[0]}}</label><br>
+  <input type="radio" id="word2" name="word" value="1" [(ngModel)]="this.selectionIndex" (change)="this.chooseWord()">
+  <label for="word2" class="label">{{wordSuggestions[1]}}</label><br>
+  <input type="radio" id="word3" name="word" value="2" [(ngModel)]="this.selectionIndex" (change)="this.chooseWord()">
+  <label for="word3" class="label">{{wordSuggestions[2]}}</label>
+</div>
+<div class="modal-footer">
+    <button type="button" (click) ="close()"  class="btn btn-primary">Continuer</button>
+</div>

@@ -1,0 +1,92 @@
+<div (click)="goToMenu()" class="social-menu-back clickable section p-1 menu-option">
+    <fa-icon [icon]="faArrowCircleLeft" [size]="'3x'" class="icon-color"></fa-icon>
+</div>
+<div class="social-menu-avatar-menu">
+    <app-avatar-menu [placement]="'bottom'" (disconnect)="disconnectUser()" (profile)="goToProfile()"></app-avatar-menu>
+</div>
+<div class="social-menu bg-standard"
+    [style]="!hasLoaded ? 'display:flex;justify-content:center;align-items:center;' : ''">
+    <div *ngIf="!hasLoaded" class="bg-standard">
+        <fa-icon [icon]="faCircleNotch" [size]="'5x'" spin="true" class="icon-color"></fa-icon>
+    </div>
+    <div *ngIf="hasLoaded" class="social-menu-container">
+        <div class="social-menu-container-title">
+            <span class='social-menu-container-title-text'>
+                Liste d'amis
+            </span>
+        </div>
+        <div style="display: flex; flex-direction: row nowrap;">
+            <div class="mb-3">
+                <button class="btn btn-primary" (click)="addFriend()">Ajouter Un Ami</button>
+            </div>
+            <div class="mb-3 ml-2">
+                <button class="btn btn-primary" (click)="goToProfile()">Mon Profil</button>
+            </div>
+        </div>
+        <div style="overflow-y: auto; max-height: 20rem; border: 1px solid #999999AA;" class="rounded p-2">
+            <div *ngFor="let f of friends" class="social-menu-container-friend rounded">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <div class="social-menu-avatar-container">
+                        <img class='social-menu-avatar-container-image'
+                            [attr.src]="f.avatar.length > 0 ? f.avatar : 'assets/images/base_avatar.png'">
+                        <span *ngIf="f.status === 0" class='social-menu-avatar-container-online' placement="auto"
+                            container="body" ngbTooltip="En ligne"></span>
+                        <span *ngIf="f.status === 1" class='social-menu-avatar-container-disturb' placement="auto"
+                            container="body" ngbTooltip="Ne pas déranger"></span>
+                        <span *ngIf="f.status === 2" class='social-menu-avatar-container-inactive' placement="auto"
+                            container="body" ngbTooltip="Inactif"></span>
+                        <span *ngIf="f.status === 3" class='social-menu-avatar-container-ingame' placement="auto"
+                            container="body" ngbTooltip="En partie"></span>
+                        <span *ngIf="f.status === 4" class='social-menu-avatar-container-ingame' placement="auto"
+                            container="body" ngbTooltip="En attente"></span>
+                        <span *ngIf="f.status === 5" class='social-menu-avatar-container-offline' placement="auto"
+                            container="body" ngbTooltip="Hors ligne"></span>
+                    </div>
+                    <div class="ml-2">{{f.username}}</div>
+                </div>
+                <div ngbDropdown container="body" class="players-list-container-player-action">
+                    <button class="btn btn-outline-secondary bg-standard btn-xs" ngbDropdownToggle>Actions</button>
+                    <div ngbDropdownMenu>
+                        <button ngbDropdownItem class="btn-sm" (click)="removeFriend(f)">Retirer</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="friends.length === 0" style="font-weight: 500;" class="pt-3 pb-3" style="text-align: center;">
+                Vous n'avez pas d'amis :(
+            </div>
+        </div>
+        <div class="btn btn-secondary btn-lg btn-block social-menu-collapse-button mt-3"
+            (click)="requestsCollapse.toggle()">
+            <i class="fas fa-caret-square-right social-menu-rotate"
+                [class.fa-rotate-90]="!requestsCollapse.collapsed"></i>
+            <span class="ml-2">Requêtes ({{requests.length}})</span>
+        </div>
+        <div #requestsCollapse="ngbCollapse" class="collapse" ngbCollapse="true">
+            <div class="card social-menu-collapse-container">
+                <div *ngFor="let r of requests"
+                    style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;"
+                    class="p-2">
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <img style="border-radius: 100%;width: 2rem;height: 2rem;object-fit: cover;"
+                            [attr.src]="r.avatar.length > 0 ? r.avatar : 'assets/images/base_avatar.png'">
+                        <div class="ml-1">{{r.sender}}</div>
+                    </div>
+                    <div style="display: flex; flex-direction: row; align-items: center;">
+                        <button class="btn btn-success mr-1" (click)="acceptRequest(r)">
+                            <i class="fa fa-check"></i>
+                        </button>
+                        <button class="btn btn-danger" (click)="rejectRequest(r)">
+                            <i class="fa fa-ban"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="text-align: center;" *ngIf="requests.length === 0">Vous n'avez pas de requêtes d'ami.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="social-menu-chat">
+    <app-chat [isInAppWindow]="true" [isInGameZone]="false"></app-chat>
+</div>

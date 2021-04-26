@@ -1,0 +1,114 @@
+<div (click)="goToMenu()" class="lobby-list-back clickable section p-1 menu-option">
+    <i class="fa fa-arrow-circle-left fa-3x icon-color"></i>
+</div>
+<div class="lobby-list-avatar">
+    <app-avatar-menu [placement]="'bottom'" (disconnect)="disconnectUser()" (profile)="goToProfile()"></app-avatar-menu>
+</div>
+<div class="lobby-list bg-standard"
+    [style]="!hasLoaded ? 'display:flex;justify-content:center;align-items:center;' : ''">
+    <div *ngIf="!hasLoaded" class="bg-standard">
+        <fa-icon [icon]="faCircleNotch" [size]="'5x'" spin="true" class="icon-color"></fa-icon>
+    </div>
+    <div *ngIf="hasLoaded" class="lobby-list-container p-1">
+        <p class="lobby-list-container-title">
+            <span class='lobby-list-container-title-text'>
+                Liste de parties
+            </span>
+        </p>
+        <div class="lobby-list-search" style="display: flex; flex-direction: row;">
+            <div class="input-group input-group-sm pr-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Difficulté</label>
+                </div>
+                <select class="custom-select" name="difficultySelect" [(ngModel)]="curDifficulty"
+                    (ngModelChange)="filterLobbies()">
+                    <option value="-1">Tous</option>
+                    <option value="0">Facile</option>
+                    <option value="1">Normale</option>
+                    <option value="2">Difficile</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm pr-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Mode</label>
+                </div>
+                <select class="custom-select" name="modeSelect" [(ngModel)]="curMode" (ngModelChange)="filterLobbies()">
+                    <option value="all">Tous</option>
+                    <option value="classic">Classique</option>
+                    <option value="freeForAll">Chacun pour soi</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm pr-2">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Hôte</label>
+                </div>
+                <input type="text" class="form-control" placeholder="Entrez pour rechercher" [(ngModel)]="hostName"
+                    (ngModelChange)="filterLobbies()">
+            </div>
+            <button class="btn btn-secondary btn-sm mr-2" [ngbPopover]="moreOptionsInput" [autoClose]="'outside'"><i
+                    class="fa fa-ellipsis-h"></i></button>
+            <ng-template #moreOptionsInput>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input clickable" id="friendOnlySwitch" name="friendOnlySwitch1"
+                        [(ngModel)]="extraOptions.friendsOnly" (ngModelChange)="filterLobbies()">
+                    <label class="custom-control-label clickable" for="friendOnlySwitch">Amis seulement</label>
+                </div>
+                <!--<div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input clickable" id="switchHasPower" name="switchHasPower1"
+                        [(ngModel)]="extraOptions.hasPowers" (ngModelChange)="filterLobbies()">
+                    <label class="custom-control-label clickable" for="switchHasPower">Pouvoirs seulement</label>
+                </div>-->
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input clickable" id="switchGameFull" name="switchGameFull1"
+                        [(ngModel)]="extraOptions.hasSpace" (ngModelChange)="filterLobbies()">
+                    <label class="custom-control-label clickable" for="switchGameFull">Places libres seulement</label>
+                </div>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input clickable" id="switchPublicGames" name="switchPublicGames1"
+                        [(ngModel)]="extraOptions.isPublic" (ngModelChange)="filterLobbies()">
+                    <label class="custom-control-label clickable" for="switchPublicGames">Parties publiques
+                        seulement</label>
+                </div>
+            </ng-template>
+        </div>
+        <div class="lobby-list-error ml-5 mb-2">{{errorMessage}}</div>
+        <div class="ml-5 mb-2" *ngIf="filteredLobbies.length === 0">Aucune partie trouvée</div>
+        <div style="overflow-y: auto; max-height: 30rem; height: 30rem">
+            <div *ngFor="let lobby of filteredLobbies; trackBy: trackByHost;"
+                class="lobby-list-lobby rounded ml-5 mr-5">
+                <div class="lobby-list-lobby-container m-2">
+                    <div>La partie de {{lobby.host}}</div>
+                    <div>Nombre de Joueurs: {{lobby.users.length}}/{{lobby.isClassic ? '4' : '8'}}</div>
+                    <div>Difficulté: {{getDifficulty(lobby.difficulty)}}</div>
+                    <div>
+                        <div>Type: {{lobby.isClassic ? 'Classique' : 'Chacun pour soi'}}</div>
+                        <div *ngIf="lobby.gotPower">Pouvoirs activés !</div>
+                    </div>
+                    <button *ngIf="lobby.password.length === 0" class="btn btn-primary btn-sm mt-2"
+                        (click)="joinLobby(lobby.gameId)"> Joindre la partie </button>
+                    <button *ngIf="lobby.password.length !== 0" class="btn btn-primary btn-sm mt-2"
+                        [ngbPopover]="passwordInput" [autoClose]="'outside'"><i class="fa fa-lock"></i> Joindre la
+                        partie </button>
+                </div>
+                <ng-template #passwordInput>
+                    <div style="display: flex; flex-direction: row;">
+                        <div class="input-group">
+                            <input [attr.type]="showPassword ? 'text' : 'password'" class="form-control"
+                                [(ngModel)]=curPassword>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="joinLobby(lobby.gameId)"><i
+                                        class="fa fa-unlock"></i></button>
+                            </div>
+                        </div>
+                        <i class="fa fa-eye fa-2x ml-2 mt-1" (mouseover)="showPassword = true"
+                            (mouseleave)="showPassword = false"></i>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="lobby-list-chat">
+    <app-chat [isInAppWindow]="true" [isInGameZone]="false"></app-chat>
+</div>

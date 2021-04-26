@@ -1,0 +1,128 @@
+<div (click)="goToMenu()" class="user-profile-back clickable section p-1 menu-option">
+  <fa-icon [icon]="faArrowCircleLeft" [size]="'3x'" class="icon-color"></fa-icon>
+</div>
+
+<div class="user-profile bg-standard"
+  [style]="!hasLoaded ? 'display:flex;justify-content:center;align-items:center;' : ''">
+  <div *ngIf="!hasLoaded" class="bg-standard">
+    <fa-icon [icon]="faCircleNotch" [size]="'5x'" spin="true" class="icon-color"></fa-icon>
+  </div>
+  <div *ngIf="hasLoaded" class="user-profile-container">
+    <div class="user-profile-container-title">
+      <span class='user-profile-container-title-text'>
+        Profil utilisateur
+      </span>
+    </div>
+    <div class="user-profile-container-info">
+      <div class="user-profile-avatar">
+        <div class="user-profile-avatar-container">
+          <img class='user-profile-avatar-container-image'
+            [attr.src]="auth.avatarSrc.length > 0 ? auth.avatarSrc : 'assets/images/base_avatar.png'">
+          <button class="btn btn-primary ml-3 btn-sm" (click)="imgInput.click()"
+            [disabled]="isUploading">Changer</button>
+          <button class="btn btn-primary ml-3 btn-sm" (click)="openImageSelection()"
+            [disabled]="isUploading">Choisir</button>
+          <button class="btn btn-primary ml-3 btn-sm" (click)="goToCanvas()" [disabled]="isUploading">Créer</button>
+        </div>
+      </div>
+      <div class="user-profile-error">{{avatarError}}</div>
+      <label for="username_input" class="mt-2">Nom d'utilisateur</label>
+      <div class="input-group">
+        <input id="username_input_profile" class="form-control" type="text" [(ngModel)]="profile.username" required
+          readonly maxlength="16" pattern="^[^\s].*">
+        <!--<div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">{{loginFormData.username.length}}/16</span>
+                </div>-->
+      </div>
+      <label for="firstname_input_profile" class="mt-2">Prénom</label>
+      <div class="input-group">
+        <input id="firstname_input_profile" class="form-control" type="text" [(ngModel)]="profile.firstName" required
+          readonly maxlength="16" pattern="^[^\s].*">
+      </div>
+      <label for="lastname_input_profile" class="mt-2">Nom de famille</label>
+      <div class="input-group">
+        <input id="firstname_input" class="form-control" type="text" [(ngModel)]="profile.lastName" required readonly
+          maxlength="16" pattern="^[^\s].*">
+      </div>
+      <div class="btn btn-secondary btn-lg btn-block user-profile-collapse-button mt-3"
+        (click)="statsCollapse.toggle()">
+        <i class="fas fa-caret-square-right user-profile-rotate" [class.fa-rotate-90]="!statsCollapse.collapsed"></i>
+        <span class="ml-2">Statistiques</span>
+      </div>
+      <div #statsCollapse="ngbCollapse" class="collapse" ngbCollapse="true">
+        <div class="card user-profile-collapse-container">
+          <div class="card-body user-profile-collapse-body">
+            <div>Nombre de parties jouées : {{this._stats.gamesPlayed}}</div>
+            <br>
+            <div>Pourcentage de victoires : {{this._stats.percentageGamesWon}} %</div>
+            <br>
+            <div>Temps moyen d'une partie : {{this._stats.averageHours}} h {{this._stats.averageMinutes}} min</div>
+            <br>
+            <div>Temps de jeu total : {{this._stats.totalHours}} h {{this._stats.totalMinutes}} min</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn btn-secondary btn-lg btn-block user-profile-collapse-button mt-1" (click)="playCollapse.toggle()">
+        <i class="fas fa-caret-square-right user-profile-rotate" [class.fa-rotate-90]="!playCollapse.collapsed"></i>
+        <span class="ml-2">Historique de jeu</span>
+      </div>
+      <div #playCollapse="ngbCollapse" class="collapse" ngbCollapse="true">
+        <div class="card user-profile-collapse-container">
+          <div class="card-body user-profile-collapse-body">
+            <div class="rounded p-2 mb-1" style="border: 1px solid rgba(0,0,0,.125);" *ngFor="let game of this._games.games, let i = index">
+              <h5 class="pb-1" [class.pt-2]="i > 0">Partie {{i+1}}</h5>
+              <div> Difficulté : {{game.difficulty}} </div>
+              <div> Mode de jeu : {{game.gameMode}} </div>
+              <div> Score final : {{game.getPoints(auth.username)}}</div>
+              <div *ngIf="game.wasWon">Résultat : victoire</div>
+              <div *ngIf="!game.wasWon">Résultat : défaite</div>
+              <div> Hôte : {{game.host}}</div>
+              <div style="display: block;">
+                Joueurs:
+                <span class="player" *ngFor="let player of game.players; let j = index;">
+                  {{player}}{{j < game.players.length - 1 ? ', ' : '' }} </span>
+              </div>
+              <div>Début : {{game.start}}</div>
+              <div>Fin : {{game.end}}</div>
+            </div>
+            <div *ngIf="this._games.games.length === 0">Pas d'historique de partie.</div>
+          </div>
+          <br><br>
+        </div>
+      </div>
+      <div class="btn btn-secondary btn-lg btn-block user-profile-collapse-button mt-1"
+        (click)="connectCollapse.toggle()">
+        <i class="fas fa-caret-square-right user-profile-rotate" [class.fa-rotate-90]="!connectCollapse.collapsed"></i>
+        <span class="ml-2">Historique de connexion</span>
+      </div>
+      <div #connectCollapse="ngbCollapse" class="collapse" ngbCollapse="true">
+        <div class="card user-profile-collapse-container">
+          <div class="card-body user-profile-collapse-body">
+            <div *ngFor="let date of profile.connections">{{date}}</div>
+            <div *ngIf="profile.connections.length === 0">Pas d'historique de connexion</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn btn-secondary btn-lg btn-block user-profile-collapse-button mt-1"
+        (click)="disconnectCollapse.toggle()">
+        <i class="fas fa-caret-square-right user-profile-rotate"
+          [class.fa-rotate-90]="!disconnectCollapse.collapsed"></i>
+        <span class="ml-2">Historique de déconnexion</span>
+      </div>
+      <div #disconnectCollapse="ngbCollapse" class="collapse" ngbCollapse="true">
+        <div class="card user-profile-collapse-container">
+          <div class="card-body user-profile-collapse-body">
+            <div *ngFor="let date of profile.disconnections">{{date}}</div>
+            <div *ngIf="profile.disconnections.length === 0">Pas d'historique de déconnexion</div>
+          </div>
+        </div>
+      </div>
+      <div class="pb-4"></div>
+    </div>
+  </div>
+</div>
+<div class="user-profile-chat">
+  <app-chat [isInAppWindow]="true" [isInGameZone]="false"></app-chat>
+</div>
+<input hidden #imgInput type="file" id="img" name="img" accept=".png, .jpg, .jpeg, .bmp"
+  (change)="saveImage($event.target.files)">

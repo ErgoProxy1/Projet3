@@ -1,0 +1,25 @@
+<svg>
+    <g #svg>
+        <g *ngFor="let i of primitives" [ngSwitch]="i.type" (mousedown)="mouseDownOnCanvas($event,i);"
+            (mouseup)="mouseUpOnCanvas($event,i);" (mousemove)="mouseMoveOnCanvas($event,i);"
+            (click)="clickOnCanvas($event,i);" (contextmenu)="clickOnCanvas($event,i);">
+            <g *ngIf="i.toShow" [attr.transform]="i.transformations">
+                <rect *ngSwitchCase="PrimitiveType.Perimeter" [attr.x]="i.position.x" [attr.y]="i.position.y"
+                    [attr.width]="i.getAbsoluteWidth()" [attr.height]="i.getAbsoluteHeight()"
+                    [attr.fill]="i.fillColor.asString()" [attr.stroke]="i.strokeColor.asString()"
+                    [attr.stroke-width]="i.strokeWidth" [attr.stroke-dasharray]="'4'"></rect>
+
+                <rect *ngSwitchCase="PrimitiveType.Rectangle" [attr.x]="i.position.x" [attr.y]="i.position.y"
+                    [attr.width]="i.getAbsoluteWidth()" [attr.height]="i.getAbsoluteHeight()"
+                    [attr.fill]="i.fillColor.asString()" [attr.stroke]="i.strokeColor.asString()"
+                    [attr.stroke-width]="i.strokeWidth"></rect>
+
+                <g *ngSwitchCase="PrimitiveType.Pencil">
+                    <path [attr.d]="i.commandSvg" [attr.stroke]="i.strokeColor.asString()" [attr.fill]="i.fillColor ? i.fillColor.asString() : 'none'"
+                        [attr.stroke-width]="i.strokeWidth" stroke-linejoin="round" stroke-linecap="round">
+                    </path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

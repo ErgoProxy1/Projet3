@@ -1,0 +1,73 @@
+<div class="modal-header">
+    <h5 class="modal-title">Finalisation</h5>
+    <button type="button" class="close" (click)="dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="mb-1" [style.font-family]="'roboto, Verdana, Geneva, Tahoma, sans-serif'">Mot</div>
+    <input type="text" class="form-control" [(ngModel)]="word">
+    <div class="pt-2">
+        <div class="mb-1" [style.font-family]="'roboto, Verdana, Geneva, Tahoma, sans-serif'">Difficulté</div>
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="diffSelect" [(ngModel)]="difficulty">
+            <label ngbButtonLabel class="btn-secondary">
+                <input ngbButton type="radio" [value]="0"> Facile
+            </label>
+            <label ngbButtonLabel class="btn-secondary">
+                <input ngbButton type="radio" [value]="1"> Normale
+            </label>
+            <label ngbButtonLabel class="btn-secondary">
+                <input ngbButton type="radio" [value]="2"> Difficile
+            </label>
+        </div>
+    </div>
+    <div class="mb-1" [style.font-family]="'roboto, Verdana, Geneva, Tahoma, sans-serif'">Ordre de Traçage</div>
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="modeSelect" [(ngModel)]="drawMode">
+        <label ngbButtonLabel class="btn-secondary">
+            <input ngbButton type="radio" [value]="0"> En Ordre
+        </label>
+        <label ngbButtonLabel class="btn-secondary">
+            <input ngbButton type="radio" [value]="1"> Aléatoire
+        </label>
+        <label ngbButtonLabel class="btn-secondary">
+            <input ngbButton type="radio" [value]="2"> Panoramique
+        </label>
+        <label ngbButtonLabel class="btn-secondary">
+            <input ngbButton type="radio" [value]="3"> Centré
+        </label>
+    </div>
+    <div class="pt-2" *ngIf="drawMode === 2">
+        <div class="mb-1" [style.font-family]="'roboto, Verdana, Geneva, Tahoma, sans-serif'">Ordre Panoramique</div>
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="modeSelect" [(ngModel)]="panType">
+            <label ngbButtonLabel class="btn-secondary" ngbTooltip="Vers la droite">
+                <input ngbButton type="radio" [value]="0"> <i class="fa fa-arrow-right"></i>
+            </label>
+            <label ngbButtonLabel class="btn-secondary" ngbTooltip="Vers la gauche">
+                <input ngbButton type="radio" [value]="1"> <i class="fa fa-arrow-left"></i>
+            </label>
+            <label ngbButtonLabel class="btn-secondary" ngbTooltip="Vers le bas">
+                <input ngbButton type="radio" [value]="2"> <i class="fa fa-arrow-down"></i>
+            </label>
+            <label ngbButtonLabel class="btn-secondary" ngbTooltip="Vers le haut">
+                <input ngbButton type="radio" [value]="3"> <i class="fa fa-arrow-up"></i>
+            </label>
+        </div>
+    </div>
+    <div class="pt-2" *ngIf="drawMode === 3">
+        <div class="mb-1" [style.font-family]="'roboto, Verdana, Geneva, Tahoma, sans-serif'">Ordre Centré</div>
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="modeSelect" [(ngModel)]="centerType">
+            <label ngbButtonLabel class="btn-secondary" ngbTooltip="Vers le centre">
+                <input ngbButton type="radio" [value]="0"> <i class="fa fa-compress-arrows-alt"></i>
+            </label>
+            <label ngbButtonLabel class="btn-secondary" ngbTooltip="À partir du centre">
+                <input ngbButton type="radio" [value]="1"> <i class="fa fa-expand-arrows-alt"></i>
+            </label>
+        </div>
+    </div>
+    <div class="mb-1 mt-1" [style.font-family]="'roboto, Verdana, Geneva, Tahoma, sans-serif'">Indices (Séparés par des virgules)</div>
+    <textarea type="text" class="form-control" [(ngModel)]="clues"></textarea>
+</div>
+<div class="modal-footer">
+    <button type="button" (click)="close()" class="btn btn-primary" [disabled]="word.length === 0">Upload</button>
+    <button type="button" (click)="dismiss()" class="btn btn-secondary">Cancel</button>
+</div>
